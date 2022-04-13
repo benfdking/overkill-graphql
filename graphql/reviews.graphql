@@ -1,0 +1,16 @@
+type Review {
+  id: ID!
+  body: String
+  author: User!
+  product: Product!
+}
+
+type User {
+  id: ID!
+  reviews: [Review]
+}
+
+type Product {
+  id: ID!
+  reviews: [Review]
+}
