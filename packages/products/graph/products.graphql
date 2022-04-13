@@ -8,3 +8,7 @@ type User {
   id: ID!
   purchases: [Product]
 }
+
+type Query {
+  listProducts: [Product]
+}

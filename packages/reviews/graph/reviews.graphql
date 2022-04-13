@@ -14,3 +14,7 @@ type Product {
   id: ID!
   reviews: [Review]
 }
+
+type Query {
+  listReviews: [Review]
+}

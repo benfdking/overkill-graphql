@@ -29,6 +29,7 @@ type Config struct {
 }
 
 type ResolverRoot interface {
+	Query() QueryResolver
 }
 
 type DirectiveRoot struct {
@@ -41,6 +42,7 @@ type ComplexityRoot struct {
 	}
 
 	Query struct {
+		ListReviews        func(childComplexity int) int
 		__resolve__service func(childComplexity int) int
 	}
 
@@ -89,6 +91,13 @@ func (e *executableSchema) Complexity(typeName, field string, childComplexity in
 		}
 
 		return e.complexity.Product.Reviews(childComplexity), true
+
+	case "Query.listReviews":
+		if e.complexity.Query.ListReviews == nil {
+			break
+		}
+
+		return e.complexity.Query.ListReviews(childComplexity), true
 
 	case "Query._service":
 		if e.complexity.Query.__resolve__service == nil {
@@ -211,6 +220,10 @@ type User {
 type Product {
   id: ID!
   reviews: [Review]
+}
+
+type Query {
+  listReviews: [Review]
 }
 `, BuiltIn: false},
 	{Name: "federation/directives.graphql", Input: `
