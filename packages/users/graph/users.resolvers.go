@@ -14,11 +14,11 @@ func (r *queryResolver) ListUsers(ctx context.Context) ([]*model.User, error) {
 	return []*model.User{
 		{
 			ID:   "id1",
-			Name: "Name 1",
+			Name: "Ben",
 		},
 		{
 			ID:   "id2",
-			Name: "Name 2",
+			Name: "Bob",
 		},
 	}, nil
 }
