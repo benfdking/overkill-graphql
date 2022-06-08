@@ -7,3 +7,7 @@ copy_graphs:
 .PHONY: generate
 go_generate: 
 	go generate ./...
+
+.PHONY: run_all
+run_all:
+	(trap 'kill 0' SIGINT; go run packages/products/main.go & go run packages/reviews/main.go & go run packages/users/main.go)
